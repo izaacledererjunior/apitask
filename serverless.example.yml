@@ -1,0 +1,28 @@
+service: dev-api-tasks
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  timeout: 30
+
+  environment:
+    DATABASE_HOST:
+    DATABASE_PORT:
+    DATABASE_USERNAME:
+    DATABASE_PASSWORD:
+    DATABASE_NAME:
+    DATADOG_API_KEY:
+    URL_SWAGGER:
+    URL_DATADOG:
+
+functions:
+  app:
+    handler: dist/server.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+
+plugins:
+  - serverless-offline

@@ -1,0 +1,7 @@
+.serverless
+.vscode
+dist
+node_modules
+package-lock.json
+serverless.yml
+.env

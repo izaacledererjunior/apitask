@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+    PORT:
+    DATABASE_HOST:
+    DATABASE_PORT:
+    DATABASE_USERNAME:
+    DATABASE_PASSWORD:
+    DATABASE_NAME:
+    DATADOG_API_KEY:
+    URL_SWAGGER:
+    URL_DATADOG:
+
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: ['sh', '-c', 'npm run start']
+
+  db:
+    image: postgres:14
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
